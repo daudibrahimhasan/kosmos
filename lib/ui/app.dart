@@ -23,7 +23,11 @@ class MikroApp extends StatelessWidget {
       title: 'Mikro',
       theme: mikroTheme(false),
       darkTheme: mikroTheme(true),
-      themeMode: controller.dark ? ThemeMode.dark : ThemeMode.light,
+      themeMode: switch (controller.appearance) {
+        'light' => ThemeMode.light,
+        'dark' => ThemeMode.dark,
+        _ => ThemeMode.system,
+      },
       home: Home(c: controller),
     ),
   );
@@ -100,9 +104,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                                   ? Theme.of(context).colorScheme.primary
                                   : Theme.of(context).colorScheme.onSurface,
                               backgroundColor: tab == i
-                                  ? Theme.of(context)
-                                        .colorScheme
-                                        .surfaceContainer
+                                  ? Theme.of(
+                                      context,
+                                    ).colorScheme.surfaceContainer
                                   : null,
                               minimumSize: const Size.fromHeight(52),
                               padding: const EdgeInsets.symmetric(
@@ -548,7 +552,8 @@ class _GalleryScreenState extends State<GalleryScreen> {
         if (all.isEmpty)
           EmptyState(
             title: 'Nothing here yet.',
-            body: 'Try another filter or add more photos to your permitted library.',
+            body:
+                'Try another filter or add more photos to your permitted library.',
             icon: CupertinoIcons.photo,
           ),
       ],
@@ -1095,7 +1100,8 @@ class _BatchScreenState extends State<BatchScreen> {
       body: groups.isEmpty
           ? const EmptyState(
               title: 'All clear here.',
-              body: 'Scan your library to find items to review. Nothing is selected or deleted automatically.',
+              body:
+                  'Scan your library to find items to review. Nothing is selected or deleted automatically.',
               icon: CupertinoIcons.check_mark_circled,
             )
           : ListView(
@@ -1517,18 +1523,21 @@ class SettingsScreen extends StatelessWidget {
         children: [
           const PixelTitle('Make yourself at home.', size: 28),
           const SizedBox(height: 24),
-          SwitchListTile.adaptive(
+          ListTile(
             contentPadding: EdgeInsets.zero,
-            title: const Text(
-              'Dark appearance',
-              style: TextStyle(fontSize: 13),
+            title: const Text('Appearance'),
+            subtitle: const Text('Follow your device, or choose a look.'),
+            trailing: DropdownButton<String>(
+              value: c.appearance,
+              items: const [
+                DropdownMenuItem(value: 'system', child: Text('System')),
+                DropdownMenuItem(value: 'light', child: Text('Light')),
+                DropdownMenuItem(value: 'dark', child: Text('Dark')),
+              ],
+              onChanged: (value) {
+                if (value != null) c.setAppearance(value);
+              },
             ),
-            subtitle: const Text(
-              'Chalk on black, or the warm original.',
-              style: TextStyle(fontSize: 11, height: 1.8),
-            ),
-            value: c.dark,
-            onChanged: c.toggleTheme,
           ),
           const Divider(),
           ListTile(

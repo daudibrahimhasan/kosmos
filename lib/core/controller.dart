@@ -28,7 +28,8 @@ class GalleryController extends ChangeNotifier {
       busy = false,
       scanning = false,
       deleting = false;
-  bool dark = true;
+  String appearance = 'system';
+  bool get dark => appearance == 'dark';
   int scanned = 0, scanFailures = 0, saved = 0;
   String? error;
   Future<void> _writes = Future.value();
@@ -41,7 +42,12 @@ class GalleryController extends ChangeNotifier {
   Future<void> init() async {
     try {
       final s = await store.read();
-      dark = s['dark'] ?? true;
+      final storedAppearance = s['appearance'];
+      appearance = const ['system', 'light', 'dark'].contains(storedAppearance)
+          ? storedAppearance as String
+          : s['dark'] == false
+          ? 'light'
+          : 'system';
       saved = s['saved'] ?? 0;
       features = (s['features'] as Map? ?? {}).map(
         (k, v) => MapEntry(
@@ -88,7 +94,7 @@ class GalleryController extends ChangeNotifier {
       }
     }
     final snapshot = <String, dynamic>{
-      'dark': dark,
+      'appearance': appearance,
       'saved': saved,
       'features': Map<String, dynamic>.of(_encodedFeatures),
       'peopleEnabled': peopleEnabled,
@@ -704,7 +710,12 @@ class GalleryController extends ChangeNotifier {
   }
 
   Future<void> toggleTheme(bool value) async {
-    dark = value;
+    await setAppearance(value ? 'dark' : 'light');
+  }
+
+  Future<void> setAppearance(String value) async {
+    if (!const ['system', 'light', 'dark'].contains(value)) return;
+    appearance = value;
     await persist();
     notifyListeners();
   }
