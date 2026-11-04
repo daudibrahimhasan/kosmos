@@ -1,10 +1,15 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_onnxruntime/flutter_onnxruntime.dart';
+
 import '../core/models.dart';
 import '../core/vectors.dart';
 import 'vision.dart';
+
+Float32List prepareClipPixels(Uint8List bytes) =>
+    clipPixels(decodePhoto(bytes));
 
 class AiEngine {
   static const version = 'tinyclip-vit8m-v1';
@@ -22,15 +27,19 @@ class AiEngine {
     throw e;
   });
   Future<void> _load() async {
-    final data =
-        jsonDecode(await rootBundle.loadString('assets/models/categories.json'))
-            as Map<String, dynamic>;
+    final data = jsonDecode(
+      await rootBundle.loadString('assets/models/categories.json'),
+    ) as Map<String, dynamic>;
     _categories = (data['vectors'] as Map).map(
       (k, v) => MapEntry(k.toString(), unitVector(List<num>.from(v))),
     );
     _image = await _runtime.createSessionFromAsset(
       _modelAsset('tinyclip-image.onnx'),
-      options: OrtSessionOptions(intraOpNumThreads: 2, interOpNumThreads: 1),
+      options: OrtSessionOptions(
+        intraOpNumThreads: 1,
+        interOpNumThreads: 1,
+        useArena: false,
+      ),
     );
     lastError = null;
   }
@@ -68,11 +77,11 @@ class AiEngine {
     bool video = false,
   }) async {
     await load();
-    final image = decodePhoto(bytes);
+
     final embedding = base.version == version && base.embedding.length == 512
         ? base.embedding
         : unitVector(
-            (await _run(_image!, clipPixels(image), [
+            (await _run(_image!, await compute(prepareClipPixels, bytes), [
               1,
               3,
               224,
@@ -89,11 +98,17 @@ class AiEngine {
         : ranked.first.key;
     List<FaceSample> faces = [];
     if (people && !video) {
+      final image = await compute(decodePhoto, bytes);
       if (base.faceVersion == faceVersion) {
         faces = base.faces;
       } else {
         _detector ??= await _runtime.createSessionFromAsset(
           _modelAsset('yunet.onnx'),
+          options: OrtSessionOptions(
+            intraOpNumThreads: 1,
+            interOpNumThreads: 1,
+            useArena: false,
+          ),
         );
         final detections = decodeYuNet(
           await _run(_detector!, detectorPixels(image), [1, 3, 320, 320]),
@@ -107,6 +122,11 @@ class AiEngine {
           if (sharpness < 20) continue;
           _face ??= await _runtime.createSessionFromAsset(
             _modelAsset('sface.onnx'),
+            options: OrtSessionOptions(
+              intraOpNumThreads: 1,
+              interOpNumThreads: 1,
+              useArena: false,
+            ),
           );
           final vector = unitVector(
             (await _run(_face!, aligned, [1, 3, 112, 112])).values.first,

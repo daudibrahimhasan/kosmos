@@ -1,7 +1,9 @@
 import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
+
 import '../core/controller.dart';
 import '../core/models.dart';
 import 'theme.dart';
@@ -98,9 +100,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                                   ? Theme.of(context).colorScheme.primary
                                   : Theme.of(context).colorScheme.onSurface,
                               backgroundColor: tab == i
-                                  ? Theme.of(
-                                      context,
-                                    ).colorScheme.surfaceContainer
+                                  ? Theme.of(context)
+                                        .colorScheme
+                                        .surfaceContainer
                                   : null,
                               minimumSize: const Size.fromHeight(52),
                               padding: const EdgeInsets.symmetric(
@@ -546,8 +548,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
         if (all.isEmpty)
           EmptyState(
             title: 'Nothing here yet.',
-            body:
-                'Try another filter or add more photos to your permitted library.',
+            body: 'Try another filter or add more photos to your permitted library.',
             icon: CupertinoIcons.photo,
           ),
       ],
@@ -1094,8 +1095,7 @@ class _BatchScreenState extends State<BatchScreen> {
       body: groups.isEmpty
           ? const EmptyState(
               title: 'All clear here.',
-              body:
-                  'Scan your library to find items to review. Nothing is selected or deleted automatically.',
+              body: 'Scan your library to find items to review. Nothing is selected or deleted automatically.',
               icon: CupertinoIcons.check_mark_circled,
             )
           : ListView(
@@ -1641,62 +1641,88 @@ class ModelStatusScreen extends StatelessWidget {
   final GalleryController c;
   const ModelStatusScreen({super.key, required this.c});
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('On-device models')),
-    body: ListView(
-      padding: const EdgeInsets.all(24),
-      children: [
-        const PixelTitle('Local by design.', size: 32),
-        const SizedBox(height: 24),
-        const ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: Icon(CupertinoIcons.check_mark_circled),
-          title: Text('Deterministic cleaner', style: TextStyle(fontSize: 13)),
-          subtitle: Text(
-            'SHA-256 · dHash · Laplacian variance',
-            style: TextStyle(fontSize: 11, height: 1.8),
+  Widget build(BuildContext context) => ListenableBuilder(
+    listenable: c,
+    builder: (context, _) => Scaffold(
+      appBar: AppBar(title: const Text('On-device models')),
+      body: ListView(
+        padding: const EdgeInsets.all(24),
+        children: [
+          const PixelTitle('Local by design.', size: 32),
+          const SizedBox(height: 24),
+          Text(
+            '${c.features.values.where((f) => f.embedding.length == 512).length} photos have TinyCLIP embeddings',
           ),
-        ),
-        const ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: Icon(CupertinoIcons.check_mark_circled),
-          title: Text(
-            'Personal preference model',
-            style: TextStyle(fontSize: 13),
+          Text('People grouping: ${c.peopleEnabled ? 'enabled' : 'off'}'),
+          if (c.error != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: SelectableText(c.error!),
+            ),
+          FilledButton(
+            onPressed: c.scanning || !c.allowed ? null : c.scan,
+            child: Text(
+              c.scanning
+                  ? 'Scanning ${c.scanned}/${c.items.length}'
+                  : 'Scan photos on this device',
+            ),
           ),
-          subtitle: Text(
-            'Logistic regression · TinyCLIP + quality features',
-            style: TextStyle(fontSize: 11, height: 1.8),
+          if (!c.allowed)
+            const Text('Grant photo access from Gallery before scanning.'),
+
+          const ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: Icon(CupertinoIcons.info_circle),
+            title: Text(
+              'Deterministic cleaner',
+              style: TextStyle(fontSize: 13),
+            ),
+            subtitle: Text(
+              'SHA-256 · dHash · Laplacian variance',
+              style: TextStyle(fontSize: 11, height: 1.8),
+            ),
           ),
-        ),
-        const Divider(),
-        const ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: Icon(CupertinoIcons.arrow_down_circle),
-          title: Text('TinyCLIP · bundled', style: TextStyle(fontSize: 13)),
-          subtitle: Text(
-            'Categories, similarity and personal-model inputs · runs during scan',
-            style: TextStyle(fontSize: 11, height: 1.8),
+          const ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: Icon(CupertinoIcons.info_circle),
+            title: Text(
+              'Personal preference model',
+              style: TextStyle(fontSize: 13),
+            ),
+            subtitle: Text(
+              'Logistic regression · TinyCLIP + quality features',
+              style: TextStyle(fontSize: 11, height: 1.8),
+            ),
           ),
-        ),
-        const ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: Icon(CupertinoIcons.arrow_down_circle),
-          title: Text(
-            'YuNet + SFace · bundled',
-            style: TextStyle(fontSize: 13),
+          const Divider(),
+          const ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: Icon(CupertinoIcons.arrow_down_circle),
+            title: Text('TinyCLIP · bundled', style: TextStyle(fontSize: 13)),
+            subtitle: Text(
+              'Categories, similarity and personal-model inputs · runs during scan',
+              style: TextStyle(fontSize: 11, height: 1.8),
+            ),
           ),
-          subtitle: Text(
-            'Face detection and aligned embeddings · opt-in in People',
-            style: TextStyle(fontSize: 11, height: 1.8),
+          const ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: Icon(CupertinoIcons.arrow_down_circle),
+            title: Text(
+              'YuNet + SFace · bundled',
+              style: TextStyle(fontSize: 13),
+            ),
+            subtitle: Text(
+              'Face detection and aligned embeddings · opt-in in People',
+              style: TextStyle(fontSize: 11, height: 1.8),
+            ),
           ),
-        ),
-        const SizedBox(height: 20),
-        const Text(
-          'Models run locally with ONNX Runtime. TinyCLIP supplies semantic embeddings; YuNet landmarks align faces for SFace. People grouping is off until you enable it. No photos or embeddings are uploaded. Native phone performance still needs device validation.',
-          style: TextStyle(fontSize: 11, height: 1.9),
-        ),
-      ],
+          const SizedBox(height: 20),
+          const Text(
+            'Models run locally with ONNX Runtime. TinyCLIP supplies semantic embeddings; YuNet landmarks align faces for SFace. People grouping is off until you enable it. No photos or embeddings are uploaded. Native phone performance still needs device validation.',
+            style: TextStyle(fontSize: 11, height: 1.9),
+          ),
+        ],
+      ),
     ),
   );
 }
