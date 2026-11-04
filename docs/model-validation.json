@@ -1,0 +1,237 @@
+{
+  "tinyclip": [
+    {
+      "image": "city.jpg",
+      "torch_onnx_cosine": 1.0,
+      "category": "Travel",
+      "scores": {
+        "Selfie": 0.26479066774998533,
+        "People": 0.26856125694802563,
+        "Food": 0.2520538701878259,
+        "Pet": 0.23891024032576025,
+        "Travel": 0.37042749324142316,
+        "Nature": 0.2814558481744273,
+        "Document": 0.24948483469954919,
+        "Receipt": 0.2610337975593757,
+        "Meme": 0.22368966230163387,
+        "Product": 0.3048541027040942
+      }
+    },
+    {
+      "image": "coast.jpg",
+      "torch_onnx_cosine": 1.0,
+      "category": "Nature",
+      "scores": {
+        "Selfie": 0.2922835802129123,
+        "People": 0.264515580307123,
+        "Food": 0.27093051567654025,
+        "Pet": 0.2510717265922209,
+        "Travel": 0.31252463181104007,
+        "Nature": 0.3270130496262888,
+        "Document": 0.21921231253423853,
+        "Receipt": 0.23961322908663266,
+        "Meme": 0.24794678887593696,
+        "Product": 0.2911569998285701
+      }
+    },
+    {
+      "image": "coffee.jpg",
+      "torch_onnx_cosine": 1.0000001192092896,
+      "category": "Food",
+      "scores": {
+        "Selfie": 0.2796444196323776,
+        "People": 0.27769590652928755,
+        "Food": 0.3512188207453885,
+        "Pet": 0.24852590891980686,
+        "Travel": 0.2823311757241917,
+        "Nature": 0.2467225070648979,
+        "Document": 0.22944486103835618,
+        "Receipt": 0.2789335127206215,
+        "Meme": 0.22710345650741542,
+        "Product": 0.32104724794564365
+      }
+    },
+    {
+      "image": "desert.jpg",
+      "torch_onnx_cosine": 1.0,
+      "category": "Travel",
+      "scores": {
+        "Selfie": 0.2289171993823827,
+        "People": 0.24305018866543768,
+        "Food": 0.23979416950221782,
+        "Pet": 0.23284041658554838,
+        "Travel": 0.32954647848773355,
+        "Nature": 0.2904877055411099,
+        "Document": 0.2146120343918725,
+        "Receipt": 0.22945398108393167,
+        "Meme": 0.2001692256212519,
+        "Product": 0.28085097710148743
+      }
+    },
+    {
+      "image": "dog.jpg",
+      "torch_onnx_cosine": 1.0000001192092896,
+      "category": "Pet",
+      "scores": {
+        "Selfie": 0.2939376859029492,
+        "People": 0.2748456881340652,
+        "Food": 0.27136617678253694,
+        "Pet": 0.37133432011197465,
+        "Travel": 0.2812758820249197,
+        "Nature": 0.25683797771062433,
+        "Document": 0.22556107508244866,
+        "Receipt": 0.253111168166678,
+        "Meme": 0.2519630671049595,
+        "Product": 0.2949117599344953
+      }
+    },
+    {
+      "image": "flower.jpg",
+      "torch_onnx_cosine": 1.0,
+      "category": "Nature",
+      "scores": {
+        "Selfie": 0.2582732132045857,
+        "People": 0.23626473841653753,
+        "Food": 0.2641755775316706,
+        "Pet": 0.25070552741282115,
+        "Travel": 0.2904959325877032,
+        "Nature": 0.3427182784237403,
+        "Document": 0.23431363675206127,
+        "Receipt": 0.24657358189327927,
+        "Meme": 0.18541239649876334,
+        "Product": 0.3173403940030042
+      }
+    },
+    {
+      "image": "forest.jpg",
+      "torch_onnx_cosine": 1.000000238418579,
+      "category": "Nature",
+      "scores": {
+        "Selfie": 0.2596998419046772,
+        "People": 0.26263690236642995,
+        "Food": 0.24493421142550023,
+        "Pet": 0.24384847479568364,
+        "Travel": 0.3044360562610857,
+        "Nature": 0.35079509455292035,
+        "Document": 0.20877489459719933,
+        "Receipt": 0.20968588354787338,
+        "Meme": 0.19799680965250172,
+        "Product": 0.2772932174075816
+      }
+    },
+    {
+      "image": "lake.jpg",
+      "torch_onnx_cosine": 1.0,
+      "category": "Nature",
+      "scores": {
+        "Selfie": 0.24488553302981353,
+        "People": 0.2518625172402883,
+        "Food": 0.23439765564404613,
+        "Pet": 0.22121627617054815,
+        "Travel": 0.2790288181988736,
+        "Nature": 0.29616019096676033,
+        "Document": 0.1888181777694037,
+        "Receipt": 0.19037148299110396,
+        "Meme": 0.2185508589190521,
+        "Product": 0.2729660839696169
+      }
+    },
+    {
+      "image": "mountain.jpg",
+      "torch_onnx_cosine": 1.0000001192092896,
+      "category": "Nature",
+      "scores": {
+        "Selfie": 0.22328964276679236,
+        "People": 0.2321670767224025,
+        "Food": 0.23045742323756602,
+        "Pet": 0.20553671324507922,
+        "Travel": 0.259714640241275,
+        "Nature": 0.3249516914519491,
+        "Document": 0.19312934598269657,
+        "Receipt": 0.19448455893672462,
+        "Meme": 0.19116135021160327,
+        "Product": 0.2806811520124042
+      }
+    },
+    {
+      "image": "ocean.jpg",
+      "torch_onnx_cosine": 0.9999998807907104,
+      "category": "Nature",
+      "scores": {
+        "Selfie": 0.262670027393358,
+        "People": 0.26943698594909576,
+        "Food": 0.2836809440744526,
+        "Pet": 0.25843911100950934,
+        "Travel": 0.2905495108618815,
+        "Nature": 0.3365594193813699,
+        "Document": 0.2666869969163105,
+        "Receipt": 0.26140952834984643,
+        "Meme": 0.2182814828190813,
+        "Product": 0.32073035654509596
+      }
+    },
+    {
+      "image": "portrait.jpg",
+      "torch_onnx_cosine": 0.9999998807907104,
+      "category": "Selfie",
+      "scores": {
+        "Selfie": 0.3277972716555954,
+        "People": 0.30318849199276227,
+        "Food": 0.2650652099094407,
+        "Pet": 0.26160777597369567,
+        "Travel": 0.26727360626700836,
+        "Nature": 0.270521764584192,
+        "Document": 0.25520662495475466,
+        "Receipt": 0.26692551387894337,
+        "Meme": 0.2512868365269733,
+        "Product": 0.3006583893014435
+      }
+    },
+    {
+      "image": "woman.jpg",
+      "torch_onnx_cosine": 1.0,
+      "category": "Selfie",
+      "scores": {
+        "Selfie": 0.32796003226149667,
+        "People": 0.3199374567655584,
+        "Food": 0.2587892254352727,
+        "Pet": 0.26366757913283523,
+        "Travel": 0.25764881583070887,
+        "Nature": 0.26359937695049473,
+        "Document": 0.2692605475595982,
+        "Receipt": 0.24997859593842411,
+        "Meme": 0.27589981624062165,
+        "Product": 0.32302084107494905
+      }
+    }
+  ],
+  "artifacts": {
+    "sface.onnx": {
+      "bytes": 38688787,
+      "sha256": "ae6a6ac44d2bdc87924e75fb23d8212430dd24f037f5e035c21deff99afc8b61"
+    },
+    "tinyclip-image.onnx": {
+      "bytes": 33219294,
+      "sha256": "57671d1222e401b0145323e38dae99f9b8965affe72f4afeabafe0497db6b4a2"
+    },
+    "yunet.onnx": {
+      "bytes": 232557,
+      "sha256": "beb05bf2378aee45cd7c41056da07265b7bb91041ed1b06f923819a9c744ec36"
+    }
+  },
+  "runtime_smoke_test": {
+    "date": "2026-11-04",
+    "browser": "Chrome 156, local static preview",
+    "sample_entries_analyzed": 30,
+    "unique_photo_images": 12,
+    "embedding_dimensions": 512,
+    "expected_top_category_matches": 11,
+    "abstained_to_other": [
+      "woman.jpg"
+    ],
+    "people_opt_in": true,
+    "face_instances_on_repeated_sample_portraits": 4,
+    "repeated_people_groups": 2,
+    "opt_out_erasure": "Verified: face vectors, face group assignments and names removed from browser IndexedDB."
+  }
+}

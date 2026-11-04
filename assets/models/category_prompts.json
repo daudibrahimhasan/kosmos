@@ -1,0 +1,51 @@
+{
+  "Selfie": [
+    "a selfie taken with a phone camera",
+    "a close up selfie of a person"
+  ],
+  "People": [
+    "a photograph of people together",
+    "a portrait photograph of a person",
+    "a family photograph"
+  ],
+  "Food": [
+    "a photograph of food on a plate",
+    "a photograph of a cup of coffee",
+    "a photograph of a meal"
+  ],
+  "Pet": [
+    "a photograph of a pet dog",
+    "a photograph of a pet cat",
+    "a photograph of a domestic animal"
+  ],
+  "Travel": [
+    "a travel photograph of a city street",
+    "a photograph of a famous landmark or building",
+    "a photograph taken on a vacation in a city"
+  ],
+  "Nature": [
+    "a photograph of a mountain landscape",
+    "a photograph of a forest",
+    "a photograph of the sea or a lake",
+    "a photograph of flowers"
+  ],
+  "Document": [
+    "a photograph of a printed document with text",
+    "a photograph of handwritten notes on paper",
+    "a scanned page of a document"
+  ],
+  "Receipt": [
+    "a photograph of a shopping receipt",
+    "a photograph of a restaurant receipt",
+    "a photograph of a printed bill"
+  ],
+  "Meme": [
+    "an internet meme with text and an image",
+    "a funny meme or cartoon with a caption"
+  ],
+  "Product": [
+    "a product photograph on a plain background",
+    "a photograph of a consumer product for sale",
+    "a product listing photograph"
+  ]
+}

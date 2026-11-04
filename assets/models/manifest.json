@@ -1,0 +1,85 @@
+{
+  "schema_version": 3,
+  "status": "bundled_and_browser_smoke_tested",
+  "checked": "2026-11-04",
+  "neural_inference_implemented": true,
+  "weights_bundled": true,
+  "cloud_fallback": false,
+  "runtime": {
+    "flutter_onnxruntime": "1.9.0",
+    "onnxruntime_web": "1.31.1",
+    "native_onnxruntime": "1.28.0 for iOS"
+  },
+  "models": [
+    {
+      "id": "tinyclip-vit8m16-yfcc15m-image",
+      "tasks": [
+        "zero_shot_categories",
+        "semantic_similarity",
+        "personal_model_features"
+      ],
+      "source": "https://huggingface.co/wkcn/TinyCLIP-ViT-8M-16-Text-3M-YFCC15M",
+      "revision": "a2a8c6eaa2549ad66eb7c31b85022bf58273a26c",
+      "license": "MIT (author model card)",
+      "embedding_dimensions": 512,
+      "format": "ONNX float32 image encoder exported by tool/prepare_models.py",
+      "artifact": {
+        "file": "tinyclip-image.onnx",
+        "bytes": 33219294,
+        "sha256": "57671d1222e401b0145323e38dae99f9b8965affe72f4afeabafe0497db6b4a2"
+      },
+      "text_encoder": "Not shipped; local preparation script encodes category_prompts.json into normalized category prototypes.",
+      "prototypes": {
+        "file": "categories.json",
+        "bytes": 115654,
+        "sha256": "c05f45d09f843bce62f958eaa96b0c8bf65b4fbb7114e31d76fd9f3091d4b01d"
+      },
+      "prompt_config": {
+        "file": "category_prompts.json",
+        "bytes": 1417,
+        "sha256": "e6bb1e3a33468b018da6db57c7c9d6efbe084f26f85caed109a9e9be810b4875"
+      },
+      "license_file": "TinyCLIP-LICENSE.txt"
+    },
+    {
+      "id": "yunet-2023mar",
+      "tasks": [
+        "face_detection",
+        "five_landmarks"
+      ],
+      "source": "https://github.com/opencv/opencv_zoo/tree/48b10fa505aeb51fbd127fc60a5c660040e823b7/models/face_detection_yunet",
+      "revision": "48b10fa505aeb51fbd127fc60a5c660040e823b7",
+      "license": "MIT",
+      "format": "ONNX float32; input graph adapted to 1x3x320x320 and shape-inferred.",
+      "artifact": {
+        "file": "yunet.onnx",
+        "bytes": 232557,
+        "sha256": "beb05bf2378aee45cd7c41056da07265b7bb91041ed1b06f923819a9c744ec36"
+      },
+      "license_file": "YuNet-LICENSE.txt"
+    },
+    {
+      "id": "sface-2021dec",
+      "tasks": [
+        "aligned_face_embedding"
+      ],
+      "source": "https://github.com/opencv/opencv_zoo/tree/48b10fa505aeb51fbd127fc60a5c660040e823b7/models/face_recognition_sface",
+      "revision": "48b10fa505aeb51fbd127fc60a5c660040e823b7",
+      "license": "Apache-2.0",
+      "embedding_dimensions": 128,
+      "format": "ONNX float32; 112x112 five-landmark aligned RGB image input.",
+      "artifact": {
+        "file": "sface.onnx",
+        "bytes": 38688787,
+        "sha256": "ae6a6ac44d2bdc87924e75fb23d8212430dd24f037f5e035c21deff99afc8b61"
+      },
+      "license_file": "SFace-LICENSE.txt"
+    }
+  ],
+  "retired": [
+    "MobileCLIP published research-only weights",
+    "unspecified MobileFaceNet checkpoint",
+    "ML Kit Face Detection"
+  ],
+  "validation": "See docs/model-validation.json and docs/ML_STACK.md. Browser smoke test only; native device accuracy/performance is not established."
+}
