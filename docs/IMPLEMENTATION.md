@@ -32,7 +32,7 @@ Screenshot hints use the Apple screenshot subtype or a screenshot-like filename,
 
 ## Native verification still needed
 
-- Android SDK/Gradle compilation, iOS Xcode compilation and signing.
+- Android release compilation is verified and automated via CI (v0.1.0–v0.1.2 arm64 APKs); iOS Xcode compilation and signing remain pending.
 - ONNX inference parity, memory, scan time, battery and thermal behavior on current iOS and Android phones.
 - Permissions: denied, limited, expanded, revoked; system-selected photos on Android 14+.
 - Confirm/cancel deletion, partial failure, interrupted requests and Recently Deleted behavior on each OS/version.

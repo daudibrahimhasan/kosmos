@@ -10,7 +10,7 @@ November 4, 2026. Windows, Flutter 3.47.9, Dart 3.13.7, Chrome 156.
 - Preview viewports: 390 × 844, 768 × 1024, 1440 × 1000. Captures include Gallery, Albums, Cleaner, batch review, confirmation, swipe review, Insights, Settings and light mode.
 - Widget tests additionally cover phone text scaling at 1.5×.
 - Independent visual review: ship at browser-preview scope; all 11 captures reviewed, no material findings. Native acceptance remains unverified.
-- Native toolchains unavailable: no Android SDK; iOS requires macOS/Xcode. No native build, native screenshots, signed app or device deletion test has been completed.
+- Native toolchains unavailable locally: no local Android SDK (Android arm64 release builds are compiled via GitHub Actions CI); iOS requires macOS/Xcode. No local native screenshots, signed store app or physical device deletion test has been completed.
 
 The browser library is synthetic. These checks do not establish V2 acceptance, real-gallery AI accuracy, native media permission/deletion behavior, background operation, battery impact, or native performance. See README.md for the remaining V2 work.
 
